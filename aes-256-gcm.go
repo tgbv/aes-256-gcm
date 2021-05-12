@@ -25,7 +25,7 @@ func generateNonce() []byte {
 	return nonce
 }
 
-// Encrypts bytes with a key. It's length must be [0, 32]
+// Encrypts bytes with a key. Key can be of any size
 func Encrypt(key []byte, data *[]byte) string {
 	nonce := generateNonce()
 	keyMD5 := fmt.Sprintf("%x", md5.Sum(key))
@@ -45,7 +45,7 @@ func Encrypt(key []byte, data *[]byte) string {
 	return fmt.Sprintf("%x", out)
 }
 
-// Decrypts data with a key. It's length must be [0, 32]
+// Decrypts data with a key. Key can be of any size
 func Decrypt(key []byte, data string) []byte {
 	decData, err := hex.DecodeString(data)
 	if err != nil {
